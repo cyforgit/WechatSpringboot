@@ -7,17 +7,21 @@ import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
 
+import Cy.WeChatSpringboot.dao.usersMapper;
+
 @MapperScan("Cy.WeChatSpringboot.Dao")
 @RestController
 @EnableAutoConfiguration
 public class App {
+	@Autowired
+	private usersMapper users;
+	
 	@Value("${test.msg}")
 	private String msg;
 	
-
 	@RequestMapping("/")
 	String home() {
-		System.out.println(msg);
+		System.out.println(users.selectByPrimaryKey(1).toString());
 		return "Hello World!";
 	}
 
