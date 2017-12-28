@@ -4,8 +4,7 @@ Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: caoye1
 Implementation-Vendor-Id: Cy
 Build-Jdk: 1.8.0_144
-Implementation-URL: http://projects.spring.io/spring-boot/WeChatSpring
- boot/
+Implementation-URL: http://projects.spring.io/spring-boot/spring-boot-
+ starter-parent/WeChatSpringboot/
 Created-By: Maven Integration for Eclipse
-Implementation-Vendor: Pivotal Software, Inc.
 

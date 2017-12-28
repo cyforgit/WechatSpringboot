@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,14 +22,21 @@ import Cy.WeChatSpringboot.utils.LogUtil;
 @Controller
 @EnableAutoConfiguration
 public class AccessController {
-
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
 	Logger logger = LogUtil.getLogger();
+
+	@RequestMapping("/redistest")
+	@ResponseBody
+	public String redistest() {
+		return stringRedisTemplate.opsForValue().get("name");
+	}
 
 	@RequestMapping("/accessin")
 	@ResponseBody
 	public String accessIn(HttpServletRequest request) {
-		logger.info("get request:"+request.getQueryString());
-		
+		logger.info("get request:" + request.getQueryString());
+
 		if (request.getParameter("echostr") == null || request.getParameter("signature") == null
 				|| request.getParameter("timestamp") == null || request.getParameter("nonce") == null) {
 			logger.info("para error");
@@ -55,8 +64,8 @@ public class AccessController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		signatureResult=byteToStr(digest);
-		logger.info("signatureResult:" +signatureResult );
+		signatureResult = byteToStr(digest);
+		logger.info("signatureResult:" + signatureResult);
 		return signature.toLowerCase().equals(signatureResult.toLowerCase());
 	}
 
