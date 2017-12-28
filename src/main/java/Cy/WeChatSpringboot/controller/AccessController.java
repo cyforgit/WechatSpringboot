@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -25,11 +26,19 @@ public class AccessController {
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
 	Logger logger = LogUtil.getLogger();
+	@Value("${test.msg}")
+	private String msg;
 
 	@RequestMapping("/redistest")
 	@ResponseBody
 	public String redistest() {
 		return stringRedisTemplate.opsForValue().get("name");
+	}
+	
+	@RequestMapping("/profiletest")
+	@ResponseBody
+	public String profiletest() {
+		return msg;
 	}
 
 	@RequestMapping("/accessin")

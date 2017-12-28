@@ -1,6 +1,7 @@
 Cy\WeChatSpringboot\service\AccessInImpl.class
 Cy\WeChatSpringboot\App.class
 Cy\WeChatSpringboot\dao\usersMapper.class
+Cy\WeChatSpringboot\config\RedisConfig.class
 Cy\WeChatSpringboot\controller\AccessController.class
 Cy\WeChatSpringboot\pojo\users.class
 Cy\WeChatSpringboot\utils\LogUtil.class
