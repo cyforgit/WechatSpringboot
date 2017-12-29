@@ -1,11 +1,25 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"> 
+<!DOCTYPE html>
+<html>
 <head>
-<title>hello</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+<script
+	src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js">
+	
+</script>
+<script>
+	$(document).ready(function() {
+		$("button").click(function() {
+			$.get("./restfultest", function(data, status) {
+				alert("数据: " + data + "\n状态: " + status);
+			});
+		});
+	});
+</script>
 </head>
 <body>
-	
-	<p th:text="'Hello！, ' + ${name} + '!'">3333</p>
+
+	<button>发送一个 HTTP GET 请求并获取返回结果</button>
+
 </body>
-</html> 
+</html>

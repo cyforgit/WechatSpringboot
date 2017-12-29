@@ -1,12 +1,8 @@
 package Cy.WeChatSpringboot.controller;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.logging.log4j.Logger;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +25,18 @@ public class AccessController {
 	@Value("${test.msg}")
 	private String msg;
 
+	@RequestMapping("/restfultest")
+	@ResponseBody
+	public String restfultest() {
+		return "restful string";
+	}
+
 	@RequestMapping("/redistest")
 	@ResponseBody
 	public String redistest() {
 		return stringRedisTemplate.opsForValue().get("name");
 	}
-	
+
 	@RequestMapping("/profiletest")
 	@ResponseBody
 	public String profiletest() {
