@@ -36,7 +36,11 @@ public class AccessController {
 	@RequestMapping("/tokentest")
 	@ResponseBody
 	public String tokentest() {
+<<<<<<< HEAD
 		return tokenManager.getToken();
+=======
+		return TokenManager.getToken();
+>>>>>>> ad480ab6e46e97a3396c8c7273de46d9046aab7a
 	}
 	
 	
