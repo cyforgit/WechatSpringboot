@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import Cy.WeChatSpringboot.utils.LogUtil;
+import Cy.WeChatSpringboot.utils.TokenManager;
 
 @MapperScan("Cy.WeChatSpringboot.Dao")
 @Controller
-@EnableAutoConfiguration
 public class AccessController {
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
@@ -30,6 +30,15 @@ public class AccessController {
 	public String restfultest() {
 		return "restful string";
 	}
+	
+	@RequestMapping("/tokentest")
+	@ResponseBody
+	public String tokentest() {
+		return TokenManager.getToken();
+	}
+	
+	
+	
 
 	@RequestMapping("/redistest")
 	@ResponseBody

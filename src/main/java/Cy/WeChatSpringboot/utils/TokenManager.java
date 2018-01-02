@@ -1,11 +1,49 @@
 package Cy.WeChatSpringboot.utils;
 
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
 
-@EnableAutoConfiguration
+import Cy.WeChatSpringboot.dao.redis.IRedisDao;
+import Cy.WeChatSpringboot.pojo.Token;
+@Service
 public class TokenManager {
+	private  Logger logger = LogUtil.getLogger();
 	@Autowired
-	private StringRedisTemplate stringRedisTemplate;
+	private IRedisDao redisDao;
+
+	public  String getToken() {
+		String tokenString = null;
+		System.out.println("2222");
+		System.out.println(this.redisDao);
+		try {
+			System.out.println(redisDao.toString());
+			System.out.println("****");
+			System.out.println(redisDao.isExist("token"));
+//			if (redisDao.isExist("token")) {
+//				tokenString = (String) redisDao.getValue("token");
+//				if (!StringUtils.isEmpty(tokenString)) {
+//					return tokenString;
+//				}
+//			}
+
+		} catch (Exception e) {
+			logger.warn("GET TOKEN FROM REDIS ERROR:");
+			logger.warn(e.toString());
+		}
+		try {
+			String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx47e2c85287f3f989&secret=d4624c36b6795d1d99dcf0547af5443d";
+			Token tokenObj = (Token) HttpUtil.getFromUrl(url, Token.class);
+			if (tokenObj != null) {
+				redisDao.setValue("token", tokenObj.getAccess_token(), ConstantUtil.TOKEN_EXPIRE_TIME);
+				return tokenObj.getAccess_token().toString();
+			}
+
+		} catch (Exception e) {
+			logger.warn("GET TOKEN FROM URL:");
+			logger.warn(e.toString());
+		}
+		return tokenString;
+	}
 }
