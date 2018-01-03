@@ -34,6 +34,7 @@ public class AccessController {
 	@RequestMapping("/tokentest")
 	@ResponseBody
 	public String tokentest() {
+		logger.warn("????");
 		return TokenManager.getToken();
 	}
 	

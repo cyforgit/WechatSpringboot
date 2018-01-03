@@ -1,5 +1,8 @@
 package Cy.WeChatSpringboot.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Token {
 	private String access_token;
 	private String expires_in;

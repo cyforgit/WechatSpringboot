@@ -1,6 +1,7 @@
 package Cy.WeChatSpringboot.pojo;
 
 public class users {
+
     private Integer id;
 
     private String username;

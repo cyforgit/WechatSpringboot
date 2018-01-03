@@ -2,13 +2,25 @@ package Cy.WeChatSpringboot.utils;
 
 import org.apache.logging.log4j.Logger;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
+import Cy.WeChatSpringboot.pojo.users;
 
 public class JsonUtil {
 	private static Logger logger = LogUtil.getLogger();
 	private static ObjectMapper mapper = new ObjectMapper();
+	private static XmlMapper xmlMapper = new XmlMapper();
+	static {
+		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		xmlMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+		xmlMapper.setSerializationInclusion(Include.NON_NULL);
+	}
 
 	public static Object getObjectFromJson(String jsonString, Class<?> c) {
 		try {
@@ -27,18 +39,40 @@ public class JsonUtil {
 	 */
 	public static String getJsonFromObject(Object object) {
 		String jsonString;
-		ObjectMapper mapper = new ObjectMapper();
 		// 美化输出，仅调试使用
 		// mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		// 允许输出空对象
-		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+
 		try {
 			jsonString = mapper.writeValueAsString(object);
 		} catch (JsonProcessingException e) {
 			jsonString = null;
-			e.printStackTrace();
+			logger.warn(e.toString());
 		}
 		return jsonString;
 	}
 
+	/**
+	 * 将对象转换为XML字符串
+	 * 
+	 * @param object
+	 * @return
+	 */
+	public static String getXMLFromObject(Object object) {
+		String xmlString;
+		try {
+			xmlString = xmlMapper.writeValueAsString(object);
+		} catch (Exception e) {
+			xmlString = null;
+
+		}
+		return xmlString;
+	}
+
+	public static void main(String[] args) {
+		users user=new users();
+		user.setEmail("123132");
+		user.setMobile("moblie");
+		System.out.println(JsonUtil.getXMLFromObject(user));
+	}
 }
