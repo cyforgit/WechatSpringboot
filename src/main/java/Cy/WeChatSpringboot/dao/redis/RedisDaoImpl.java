@@ -2,19 +2,15 @@ package Cy.WeChatSpringboot.dao.redis;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
 import org.springframework.context.annotation.Primary;
-=======
->>>>>>> ad480ab6e46e97a3396c8c7273de46d9046aab7a
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-<<<<<<< HEAD
 @Primary
-=======
->>>>>>> ad480ab6e46e97a3396c8c7273de46d9046aab7a
 public class RedisDaoImpl implements IRedisDao {
 	
 	@Autowired

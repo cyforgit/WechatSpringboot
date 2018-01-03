@@ -13,16 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import Cy.WeChatSpringboot.service.TokenManager;
 import Cy.WeChatSpringboot.utils.LogUtil;
-import Cy.WeChatSpringboot.utils.TokenManager;
 
 @MapperScan("Cy.WeChatSpringboot.Dao")
 @Controller
 public class AccessController {
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
-	@Autowired
-	private TokenManager tokenManager;
 	Logger logger = LogUtil.getLogger();
 	@Value("${test.msg}")
 	private String msg;
@@ -36,11 +34,7 @@ public class AccessController {
 	@RequestMapping("/tokentest")
 	@ResponseBody
 	public String tokentest() {
-<<<<<<< HEAD
-		return tokenManager.getToken();
-=======
 		return TokenManager.getToken();
->>>>>>> ad480ab6e46e97a3396c8c7273de46d9046aab7a
 	}
 	
 	
