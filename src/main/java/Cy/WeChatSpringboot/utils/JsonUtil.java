@@ -74,5 +74,6 @@ public class JsonUtil {
 		user.setEmail("123132");
 		user.setMobile("moblie");
 		System.out.println(JsonUtil.getXMLFromObject(user));
+		
 	}
 }

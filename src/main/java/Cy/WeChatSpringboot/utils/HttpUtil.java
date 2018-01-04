@@ -1,7 +1,6 @@
 package Cy.WeChatSpringboot.utils;
 
 
-import javax.annotation.PostConstruct;
 
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
