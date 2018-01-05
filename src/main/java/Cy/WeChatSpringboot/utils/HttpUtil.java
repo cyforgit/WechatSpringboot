@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class HttpUtil {
 	private static Logger logger = LogUtil.getLogger();
 	private  static RestTemplateBuilder restTemplateBuilder;
+	
 	private static RestTemplate restTemplate;
 	//静态注入
 	@Autowired
